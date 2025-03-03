@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 
 const Header = () => {
   const theme = useTheme();
@@ -16,51 +17,50 @@ const Header = () => {
         boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
         backgroundColor: theme.palette.background.paper,
         color: theme.palette.text.primary,
+        paddingY: 1.5,
       }}
     >
       <Box
         sx={{
           display: "flex",
-          fontSize: 20,
           alignItems: "center",
           justifyContent: "space-between",
-          width: { xs: "90%", sm: "90%", md: "90%", lg: "1152px" },
-          py: 1.5,
+          width: { xs: "90%", lg: "1152px" },
         }}
       >
-        <Box>Välkommen</Box>
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1, p: 1 }}>
-          {/* Ensure the Link wraps the button for proper routing */}
-          <Button
-            component={Link}
-            to="/produkter"
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <Box
             sx={{
-              textTransform: "none", // to avoid uppercase text transformation by default
-              color: theme.palette.text.primary,
-            }}
-          >
-            Produkter
-          </Button>
-          <Button
-            component={Link}
-            to="/om-oss"
-            sx={{
+              display: 'flex',
+              alignItems: 'center',
               textTransform: "none",
-              color: theme.palette.text.primary,
+                color: theme.palette.text.primary,
+              "&:hover": {
+                backgroundColor: theme.palette.action.hover, // Hover effect for the entire Box
+              },
             }}
           >
-            Om oss
-          </Button>
-          <Button
-            component={Link}
-            to="/kontakt"
-            sx={{
-              textTransform: "none",
-              color: theme.palette.text.primary,
-            }}
-          >
-            Kontakt
-          </Button>
+            <HomeIcon sx={{ fontSize: "large", marginRight: 1 }} />
+            <Box fontSize={20}>Välkommen</Box>
+          </Box>
+        </Link>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          {["Produkter", "Om oss", "Kontakt"].map((text, index) => (
+            <Button
+              key={index}
+              component={Link}
+              to={`/${text.toLowerCase().replace(" ", "-")}`}
+              sx={{
+                textTransform: "none",
+                color: theme.palette.text.primary,
+                "&:hover": {
+                  backgroundColor: theme.palette.action.hover, // Hover effect for Button
+                },
+              }}
+            >
+              {text}
+            </Button>
+          ))}
         </Box>
       </Box>
     </Box>

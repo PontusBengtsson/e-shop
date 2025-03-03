@@ -1,6 +1,7 @@
 // Footer.js
 import React from "react";
-import { Box, Typography, Container, Grid, Link } from "@mui/material";
+import { Box, Typography, Container, Link } from "@mui/material";
+import Grid from '@mui/material/Grid';
 
 const Footer = () => {
   return (
